@@ -12,11 +12,11 @@ require(BASE_PATH . '../src/includes/nav.php');
 $page = $_GET['page'] ?? 'home';
 
 // Whitelist of allowed pages to prevent security issues
-$allowed_pages = ['home', 'about', 'contact', 'products'];
+$allowed_pages = ['home', 'about', 'contact', 'products', 'login', 'admin-dashboard'];
 
 if (in_array($page, $allowed_pages)) {
     // Include the requested page
-    require(BASE_PATH . '/src/pages/' . $page . '.php');
+    require(BASE_PATH . '../src/pages/' . $page . '.php');
 } else {
     // If page not found, show a 404 error page
     http_response_code(404);

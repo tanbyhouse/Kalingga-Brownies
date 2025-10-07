@@ -1,41 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <div class="min-h-screen flex items-center justify-center bg-gray-100">
-        <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8 border border-yellow-500">
-            <h2 class="text-3xl font-bold text-center text-yellow-900 mb-6">Admin Login</h2>
+<?php
+// PHP LOGIC (This part stays the same)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require(BASE_PATH . '/src/core/database.php');
 
-            <?php if (isset($_GET['error'])): ?>
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
-                    <span class="block sm:inline">Invalid username or password.</span>
-                </div>
-            <?php endif; ?>
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-            <!-- Post to the public front controller so the request doesn't try to access files outside `public` -->
-            <form action="../public/index.php?page=login-process" method="POST">
-                <div class="mb-4">
-                    <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-                    <input type="text" id="username" name="username" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                    <input type="password" id="password" name="password" required
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline">
-                </div>
-                <div class="flex items-center justify-between">
-                    <button type="submit"
-                            class="bg-yellow-800 hover:bg-yellow-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
-                        Sign In
-                    </button>
-                </div>
-            </form>
+    $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = ?");
+    $stmt->execute([$username]);
+    $admin = $stmt->fetch();
+
+    if ($admin && password_verify($password, $admin['password_hash'])) {
+        $_SESSION['admin_id'] = $admin['id'];
+        $_SESSION['admin_username'] = $admin['username'];
+        header('Location: index.php?page=admin-dashboard');
+        exit();
+    } else {
+        header('Location: index.php?page=login&error=1');
+        exit();
+    }
+}
+?>
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md space-y-8 bg-white rounded-lg shadow-xl p-8">
+        <div>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-yellow-900">
+                Admin Area Login
+            </h2>
         </div>
+
+        <?php if (isset($_GET['error'])): ?>
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md" role="alert">
+                <p class="font-bold">Login Failed</p>
+                <p>Please check your username and password.</p>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['loggedout'])): ?>
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md" role="alert">
+                <p>You have been successfully logged out.</p>
+            </div>
+        <?php endif; ?>
+
+        <form class="mt-8 space-y-6" action="index.php?page=login" method="POST">
+            <div class="rounded-md shadow-sm -space-y-px">
+                <div>
+                    <label for="username" class="sr-only">Username</label>
+                    <input id="username" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm" placeholder="Username">
+                </div>
+                <div>
+                    <label for="password" class="sr-only">Password</label>
+                    <input id="password" name="password" type="password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm" placeholder="Password">
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-800 hover:bg-yellow-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+                    Sign in
+                </button>
+            </div>
+        </form>
     </div>
-</body>
-</html>
+</div>

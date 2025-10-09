@@ -10,7 +10,7 @@ $products = $stmt->fetchAll();
 <div class="container mx-auto p-8">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold text-yellow-900">Manage Products</h1>
-        <a href="index.php?page=admin-product-form" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300">
+        <a href="index.php?page=admin-products-form" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300">
             + Add New Product
         </a>
     </div>

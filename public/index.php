@@ -16,7 +16,8 @@ $allowed_pages = [
     'login',
     'admin-dashboard',
     'logout',
-    'admin-products-list'
+    'admin-products-list',
+    'admin-products-form',
 ];
 
 if (in_array($page, $allowed_pages)) {
@@ -24,7 +25,7 @@ if (in_array($page, $allowed_pages)) {
     require(BASE_PATH . '/src/pages/' . $page . '.php');
 } else {
     http_response_code(404);
-    require(BASE_PATH . '/src/pages/404.php');
+    require(BASE_PATH . '/src/includes/404.php');
 }
 
 require(BASE_PATH . '/src/includes/footer.php');

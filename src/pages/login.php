@@ -1,5 +1,4 @@
 <?php
-// PHP LOGIC (This part stays the same)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require(BASE_PATH . '/src/core/database.php');
 

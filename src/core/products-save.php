@@ -1,8 +1,5 @@
 <?php
 session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 define('BASE_PATH', realpath(__DIR__ . '/../../'));
 
 if (!isset($_SESSION['admin_id'])) {
@@ -15,14 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-require_once __DIR__ . '/database.php';
+require 'database.php';
 
 // get data form
-$name = trim($_POST['name'] ?? '');
-$description = trim($_POST['description'] ?? '');
+$product_id = $_POST['product_id'] ?? null;
+$name = $_POST['name'] ?? '';
+$description = $_POST['description'] ?? '';
 $price = $_POST['price'] ?? '';
 $category_id = $_POST['category_id'] ?? '';
-$image_db_path = '';
+$image_db_path = null;
 
 // validasi
 if (empty($name) || empty($price) || empty($category_id)) {
@@ -70,6 +68,24 @@ if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPL
         header('Location: index.php?page=admin-products-form');
         exit();
     }
+} 
+
+if ($product_id) {
+    $sql = "UPDATE products SET name = ?, description = ?, price = ?, category_id = ?, image_url = ? WHERE id = ?";
+    $params = [$name, $description, $price, $category_id];
+
+    if($image_db_path) {
+        $sql .= ", image_url = ?";
+        $params[] = $image_db_path;
+    }
+
+    $sql .= " WHERE id = ?";
+    $params[] = $product_id;
+
+    $product_stmt = $pdo->prepare($sql);
+    $product_stmt->execute($params);
+
+    $success_msg = 'Product updated successfully!';
 } else {
     $upload_error = $_FILES['product_image']['error'] ?? 'Unknown error';
     $_SESSION['error'] = 'File upload failed. Error code: ' . $upload_error;

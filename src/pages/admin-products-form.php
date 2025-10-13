@@ -2,6 +2,22 @@
 require(BASE_PATH . '/src/includes/auth-check.php');
 require(BASE_PATH . '/src/core/database.php');
 
+$product_id = $_GET['id'] ?? null;
+$product = null;
+$page_title = 'Add New Product';
+
+if ($product_id) {
+    $page_title = 'Edit Product';
+    $product_stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
+    $product_stmt->execute([$product_id]);
+    $product = $product_stmt->fetch();
+    
+    if (!$product) {
+        header('Location: index.php?page=admin-products-list');
+        exit();
+    }
+}
+
 // fetch categories
 $categories_stmt = $pdo->query("SELECT * FROM categories ORDER BY name ASC");
 $categories = $categories_stmt->fetchAll();

@@ -75,7 +75,7 @@ $products = $products_stmt->fetchAll();
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     <?php foreach ($products as $product): ?>
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
-                            <a href="index.php?page=product-detail&id=<?= $product['id'] ?>">
+                            <a href="index.php?page=products-detail&id=<?= $product['id'] ?>">
                                 <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="w-full h-56 object-cover">
                                 <div class="p-6">
                                     <h2 class="text-xl font-bold text-yellow-900"><?= htmlspecialchars($product['name']) ?></h2>

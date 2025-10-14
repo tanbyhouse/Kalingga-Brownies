@@ -39,6 +39,7 @@ $allowed_pages = [
     'admin-products-form',
     'admin-categories-list',
     'admin-categories-form',
+    'products-detail',
 ];
 
 if (in_array($page, $allowed_pages)) {

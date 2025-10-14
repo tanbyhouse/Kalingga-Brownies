@@ -13,6 +13,11 @@ if ($page === 'products-save') {
     require_once BASE_PATH . '/src/core/products-save.php';
     exit();
 }
+// DELETE handler
+if ($page === 'admin-product-delete') {
+    require_once BASE_PATH . '/src/core/products-delete.php';
+    exit();
+}
 
 $allowed_pages = [
     'home',

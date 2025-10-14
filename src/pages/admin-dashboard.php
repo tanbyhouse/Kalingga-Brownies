@@ -18,6 +18,8 @@ require(BASE_PATH . '/src/includes/auth-check.php');
             <a href="index.php?page=admin-products-list" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Manage Products
             </a>
+            <a href="index.php?page=admin-categories-list" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded ml-4">Manage Categories</a>
+            
             <a href="#" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4">View Messages</a>
         </div>
     </div>

@@ -13,6 +13,14 @@ if ($page === 'products-save') {
     require_once BASE_PATH . '/src/core/products-save.php';
     exit();
 }
+if ($page === 'categories-save') {
+    require_once BASE_PATH . '/src/core/categories-save.php';
+    exit();
+}
+if ($page === 'admin-categories-delete') {
+    require_once BASE_PATH . '/src/core/categories-delete.php';
+    exit();
+}
 // DELETE handler
 if ($page === 'admin-product-delete') {
     require_once BASE_PATH . '/src/core/products-delete.php';
@@ -29,6 +37,8 @@ $allowed_pages = [
     'logout',
     'admin-products-list',
     'admin-products-form',
+    'admin-categories-list',
+    'admin-categories-form',
 ];
 
 if (in_array($page, $allowed_pages)) {

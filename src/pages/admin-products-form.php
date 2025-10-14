@@ -8,7 +8,7 @@ $page_title = 'Add New Product';
 
 if ($product_id) {
     $page_title = 'Edit Product';
-    $product_stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
+    $product_stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
     $product_stmt->execute([$product_id]);
     $product = $product_stmt->fetch();
 
@@ -74,7 +74,7 @@ $categories = $categories_stmt->fetchAll();
 
             <div>
                 <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
-                    Save Product
+                    <?= (!empty($product) ? 'Update Product' : 'Save Product') ?>
                 </button>
             </div>
         </form>

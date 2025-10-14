@@ -8,6 +8,12 @@ require(BASE_PATH . '/src/includes/nav.php');
 
 $page = $_GET['page'] ?? 'home';
 
+// POST-only handlers
+if ($page === 'products-save') {
+    require_once BASE_PATH . '/src/core/products-save.php';
+    exit();
+}
+
 $allowed_pages = [
     'home',
     'about',

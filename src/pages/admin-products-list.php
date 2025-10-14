@@ -34,7 +34,7 @@ $products = $stmt->fetchAll();
                         <tr class="border-b">
                             <td class="p-4"><?= htmlspecialchars($product['id']) ?></td>
                             <td class="p-4">
-                                <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="h-16 w-16 object-cover rounded">
+                                <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="max-w-3 object-cover rounded">
                             </td>
                             <td class="p-4"><?= htmlspecialchars($product['name']) ?></td>
                             <td class="p-4">Rp <?= number_format($product['price'], 0, ',', '.') ?></td>

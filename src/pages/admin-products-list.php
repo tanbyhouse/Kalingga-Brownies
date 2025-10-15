@@ -40,7 +40,7 @@ $products = $stmt->fetchAll();
                             <td class="p-4">Rp <?= number_format($product['price'], 0, ',', '.') ?></td>
                             <td class="p-4 text-center">
                                 <a href="index.php?page=admin-products-form&id=<?= $product['id'] ?>" class="text-blue-600 hover:underline mr-4">Edit</a>
-                                <a href="index.php?page=admin-product-delete&id=<?= $product['id'] ?>" class="text-red-600 hover:underline" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+                                <a href="index.php?page=admin-product-delete&id=<?= $product['id'] ?>" class="text-red-600 hover:underline">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

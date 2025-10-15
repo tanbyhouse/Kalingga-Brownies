@@ -2,17 +2,25 @@
     <div class="container mx-auto px-6 flex justify-between items-center">
         <div class="text-white text-2xl font-serif tracking-widest">KALINGGA BROWNIES</div>
 
-        <div class="hidden md:flex space-x-8 text-white text-lg">
-            <a href="index.php?page=about" class="hover:text-red-200">HOME</a>
-            <a href="index.php?page=products" class="hover:text-red-200">OUR BROWNIES</a>
-        </div>
+            <details class="md:hidden text-white">
+                <summary class="list-none cursor-pointer">Menu</summary>
+                <div class="mt-2 flex flex-col space-y-2 text-white text-lg">
+                    <a href="index.php?page=about" class="hover:text-red-200">HOME</a>
+                    <a href="index.php?page=products" class="hover:text-red-200">OUR BROWNIES</a>
+                </div>
+            </details>
+
+            <div class="hidden md:flex space-x-8 text-white text-lg">
+                <a href="index.php?page=about" class="hover:text-red-200">HOME</a>
+                <a href="index.php?page=products" class="hover:text-red-200">OUR BROWNIES</a>
+            </div>
         
-        <div class="text-white text-lg">
+        <div class="text-white text-lg hidden md:block">
             <a href="#" class="hover:text-red-200">CART (0)</a>
         </div>
 
         <?php if (isset($_SESSION['user_role'])): ?>
-            
+            <div class="hidden md:flex items-center space-x-4">
             <?php if ($_SESSION['user_role'] === 'admin'): ?>
                 <a href="index.php?page=admin-dashboard" class="text-white font-bold bg-red-600 px-3 py-1 rounded">Admin Dashboard</a>
             <?php else: ?>
@@ -20,7 +28,7 @@
             <?php endif; ?>
             
             <a href="index.php?page=logout" class="text-white hover:text-red-200">Logout</a>
-            
+            </div>
         <?php else: ?>
             <a href="index.php?page=login" class="text-red-900 bg-red-100 hover:bg-red-300 px-4 py-2 rounded-lg transition duration-300">Login</a>
         <?php endif; ?>

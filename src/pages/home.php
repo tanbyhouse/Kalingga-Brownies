@@ -60,7 +60,7 @@ $products = $products_stmt->fetchAll();
         <?php if (!empty($products)): ?>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <?php foreach ($products as $p): ?>
-                    <div class="border rounded-lg overflow-hidden shadow-sm bg-white">
+                    <div class="border rounded-lg overflow-hidden shadow-sm bg-white product-card transition-all duration-500">
                         <a href="index.php?page=products-detail&id=<?php echo urlencode($p['id']); ?>">
                             <img src="<?php echo htmlspecialchars($p['image_url'] ?: 'https://via.placeholder.com/400x300'); ?>" alt="<?php echo htmlspecialchars($p['name']); ?>" class="w-full h-48 object-cover">
                         </a>
@@ -77,7 +77,7 @@ $products = $products_stmt->fetchAll();
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                <?php endforeach; ?>    
             </div>
         <?php else: ?>
             <p class="text-center text-gray-600">No products found.</p>

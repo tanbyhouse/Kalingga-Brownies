@@ -41,7 +41,7 @@ $categories = $stmt->fetchAll();
                         </td>
                         <td class="p-4 text-center">
                             <a href="index.php?page=admin-categories-form&id=<?= urlencode($category['id']) ?>" class="text-blue-600 hover:underline mr-4">Edit</a>
-                            <a href="index.php?page=admin-categories-delete&id=<?= urlencode($category['id']) ?>" class="text-red-600 hover:underline" onclick="return confirm('Are you sure you want to delete this category?');">Delete</a>
+                            <a href="index.php?page=admin-categories-delete&id=<?= urlencode($category['id']) ?>" class="text-red-600 hover:underline">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -70,6 +70,7 @@ $categories = $categories_stmt->fetchAll();
                     <p class="text-sm text-gray-600 mt-2">Current image:</p>
                     <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="h-24 w-24 object-cover rounded mt-2">
                 <?php endif; ?>
+                <!-- Live preview removed: display-only form shows current image when editing -->
             </div>
 
             <div>

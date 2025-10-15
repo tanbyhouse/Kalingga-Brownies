@@ -34,7 +34,7 @@ if (!$product) {
                 <?= nl2br(htmlspecialchars($product['description'])) ?>
             </p>
             
-            <div class="text-4xl font-bold text-pink-500 mb-8">
+            <div class="text-4xl font-bold text-red-500 mb-8">
                 Rp <?= number_format($product['price'], 0, ',', '.') ?>
             </div>
 

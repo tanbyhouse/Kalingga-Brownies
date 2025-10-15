@@ -38,9 +38,9 @@ $products = $products_stmt->fetchAll();
     <div class="flex flex-col md:flex-row gap-8">
         <aside class="w-full md:w-1/4">
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h2 class="text-2xl font-bold text-yellow-900 mb-4">Categories</h2>
+                <h2 class="text-2xl font-bold text-red-950 mb-4">Categories</h2>
                 <ul class="space-y-2">
-                    <li><a href="index.php?page=products" class="font-bold text-yellow-800 hover:underline">All Products</a></li>
+                    <li><a href="index.php?page=products" class="font-bold text-red-900 hover:underline">All Products</a></li>
                     
                     <?php foreach ($categories_tree as $main_cat): ?>
                         <li>
@@ -65,7 +65,7 @@ $products = $products_stmt->fetchAll();
         </aside>
 
         <main class="w-full md:w-3/4">
-            <h1 class="text-4xl font-extrabold text-yellow-900 mb-8">Our Products</h1>
+            <h1 class="text-4xl font-extrabold text-red-900 mb-8">Our Products</h1>
             
             <?php if (empty($products)): ?>
                 <div class="bg-white p-8 rounded-lg shadow-lg text-center">
@@ -78,9 +78,9 @@ $products = $products_stmt->fetchAll();
                             <a href="index.php?page=products-detail&id=<?= $product['id'] ?>">
                                 <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="w-full h-56 object-cover">
                                 <div class="p-6">
-                                    <h2 class="text-xl font-bold text-yellow-900"><?= htmlspecialchars($product['name']) ?></h2>
+                                    <h2 class="text-xl font-bold text-red-900"><?= htmlspecialchars($product['name']) ?></h2>
                                     <p class="mt-2 text-gray-600 truncate"><?= htmlspecialchars($product['description']) ?></p>
-                                    <div class="mt-4 font-bold text-2xl text-pink-500">
+                                    <div class="mt-4 font-bold text-2xl text-red-500">
                                         Rp <?= number_format($product['price'], 0, ',', '.') ?>
                                     </div>
                                 </div>

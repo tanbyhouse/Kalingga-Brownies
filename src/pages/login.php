@@ -1,12 +1,17 @@
 <?php
+// Ensure session is started for login/flash messages
+if (session_status() === PHP_SESSION_NONE) session_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require(BASE_PATH . '/src/core/database.php');
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    // Use a single identifier field (username or email)
+    $identifier = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
 
+    // admin login (identifier treated as username)
     $stmt = $pdo->prepare("SELECT * FROM admins WHERE username = ?");
-    $stmt->execute([$username]);
+    $stmt->execute([$identifier]);
     $admin = $stmt->fetch();
 
     if ($admin && password_verify($password, $admin['password_hash'])) {
@@ -14,10 +19,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['admin_username'] = $admin['username'];
         header('Location: index.php?page=admin-dashboard');
         exit();
-    } else {
-        header('Location: index.php?page=login&error=1');
+    }
+
+    // customer login (identifier treated as email)
+    $stmt = $pdo->prepare("SELECT * FROM customers WHERE email = ?");
+    $stmt->execute([$identifier]);
+    $customer = $stmt->fetch();
+
+    if ($customer && password_verify($password, $customer['password_hash'])) {
+        $_SESSION['customer_id'] = $customer['id'];
+        $_SESSION['customer_name'] = $customer['name'];
+        $_SESSION['user_role'] = 'customer';
+        header('Location: index.php?page=products');
         exit();
     }
+
+    header('Location: index.php?page=login&error=1');
+    exit();
 }
 ?>
 
@@ -25,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="w-full max-w-md space-y-8 bg-white rounded-lg shadow-xl p-8">
         <div>
             <h2 class="mt-6 text-center text-3xl font-extrabold text-yellow-900">
-                Admin Area Login
+                Login to Your Account
             </h2>
         </div>
 
@@ -45,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form class="mt-8 space-y-6" action="index.php?page=login" method="POST">
             <div class="rounded-md shadow-sm -space-y-px">
                 <div>
-                    <label for="username" class="sr-only">Username</label>
+                    <label for="username" class="sr-only">Username or Email</label>
                     <input id="username" name="username" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm" placeholder="Username">
                 </div>
                 <div>

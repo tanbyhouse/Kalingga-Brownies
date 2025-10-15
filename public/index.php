@@ -40,6 +40,7 @@ $allowed_pages = [
     'admin-categories-list',
     'admin-categories-form',
     'products-detail',
+    'register',
 ];
 
 if (in_array($page, $allowed_pages)) {

@@ -1,31 +1,28 @@
-<nav class="bg-oil shadow-lg">
-    <div class="container mx-auto px-6 py-3">
-        <div class="flex justify-between items-center">
-        <div>
-            <a href="index.php?page=home" class="text-white text-2xl font-bold hover:text-pink-200">
-            Kalingga Brownies
-            </a>
+<nav class="sticky top-0 z-30 bg-red-950 bg-opacity-80 py-4 backdrop-blur-md shadow">
+    <div class="container mx-auto px-6 flex justify-between items-center">
+        <div class="text-white text-2xl font-serif tracking-widest">KALINGGA BROWNIES</div>
+
+        <div class="hidden md:flex space-x-8 text-white text-lg">
+            <a href="index.php?page=about" class="hover:text-red-200">HOME</a>
+            <a href="index.php?page=products" class="hover:text-red-200">OUR BROWNIES</a>
         </div>
-        <div class="hidden md:flex items-center space-x-6">
-            <a href="index.php?page=home" class="text-white hover:text-pink-200">Home</a>
-            <a href="index.php?page=products" class="text-white hover:text-pink-200">Our Brownies</a>
-            
-            <?php if (isset($_SESSION['user_role'])): ?>
+        
+        <div class="text-white text-lg">
+            <a href="#" class="hover:text-red-200">CART (0)</a>
+        </div>
+
+        <?php if (isset($_SESSION['user_role'])): ?>
             
             <?php if ($_SESSION['user_role'] === 'admin'): ?>
                 <a href="index.php?page=admin-dashboard" class="text-white font-bold bg-red-600 px-3 py-1 rounded">Admin Dashboard</a>
             <?php else: ?>
-                <a href="index.php?page=my-account" class="text-white hover:text-pink-200">My Account</a>
+                <a href="index.php?page=my-account" class="text-white hover:text-red-200">My Account</a>
             <?php endif; ?>
             
-            <a href="index.php?page=logout" class="text-white hover:text-pink-200">Logout</a>
+            <a href="index.php?page=logout" class="text-white hover:text-red-200">Logout</a>
             
         <?php else: ?>
-            <a href="index.php?page=login" class="text-white bg-pink-500 hover:bg-pink-600 px-4 py-2 rounded-md transition duration-300">Login</a>
-            <a href="index.php?page=register" class="text-white hover:text-pink-200">Register</a>
+            <a href="index.php?page=login" class="text-red-900 bg-red-100 hover:bg-red-300 px-4 py-2 rounded-lg transition duration-300">Login</a>
         <?php endif; ?>
-        
-        </div>
-        </div>
     </div>
 </nav>
